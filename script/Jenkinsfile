@@ -1,0 +1,105 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  # DNS가 없는 내부망 환경을 위한 설정
+  hostAliases:
+  - ip: "192.168.1.13"  # 실제 Harbor 서버 IP로 반드시 수정하세요!
+    hostnames:
+    - "harbor.test.com"
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    command: ["sleep"]
+    args: ["99d"]
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+  volumes:
+    - name: kaniko-secret
+      projected:
+        sources:
+          - secret:
+              name: harbor-ingress-tls # 생성하신 docker-registry 타입의 Secret 이름
+              items:
+                - key: .dockerconfigjson
+                  path: config.json
+"""
+        }
+    }
+
+    environment {
+        // Harbor 정보 설정
+        REGISTRY = "harbor.test.com"
+        PROJECT  = "test-project"
+        IMAGE    = "nginx-test"
+    }
+
+    stages {
+        stage('Build and Push to Harbor') {
+            steps {
+                container('kaniko') {
+                    // Jenkins Credentials에서 ID가 'harbor-creds'인 정보를 가져옴
+                    withCredentials([usernamePassword(credentialsId: 'harbor-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                        sh """
+                        /kaniko/executor --context `pwd` \
+                            --dockerfile `pwd`/dockerfile/Dockerfile \
+                            --destination ${REGISTRY}/${PROJECT}/${IMAGE}:${env.BUILD_NUMBER} \
+                            --insecure \
+                            --skip-tls-verify
+                        """
+                    }
+                }
+            }
+      
+ }
+    stage('Prepare SSH') {
+        steps {
+                sh '''
+                mkdir -p ~/.ssh
+                ssh-keyscan github.com >> ~/.ssh/known_hosts
+                chmod 600 ~/.ssh/known_hosts
+                '''
+       }
+    }
+
+    stage('Update Remote Manifest') {
+        steps {
+            sshagent(credentials: ['git-creds']) {
+                dir('deploy-repo') {
+                git url: 'git@github.com:yjinsoo/dragon-argocd.git',
+                branch: 'main',
+                credentialsId: 'git-creds'
+
+                        script {
+                            sh """
+                            sed -i "s|${REGISTRY}/${PROJECT}/${IMAGE}:.*|${REGISTRY}/${PROJECT}/${IMAGE}:${env.BUILD_NUMBER}|g" yaml/nginx-deployment.yaml
+            
+                            if [ -n "\$(git status --porcelain)" ]; then
+                                git config user.email "jenkins@test.com"
+                                git config user.name "jenkins"
+                                git add yaml/nginx-deployment.yaml
+                                git commit -m "chore: update image tag to ${env.BUILD_NUMBER} [skip ci]"
+                                git push origin main
+                            fi
+                            """
+                        }
+                    }
+            }
+        }
+    }
+
+}
+    
+    post {
+        success {
+            echo "Successfully pushed ${IMAGE}:${env.BUILD_NUMBER} to Harbor!"
+        }
+        failure {
+            echo "Build or Push failed. Please check the logs."
+        }
+    }
+}

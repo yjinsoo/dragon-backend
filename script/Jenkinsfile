@@ -35,7 +35,7 @@ spec:
         // Harbor 정보 설정
         REGISTRY = "harbor.test.com"
         PROJECT  = "test-project"
-        IMAGE    = "nginx-test"
+        IMAGE    = "python-test"
     }
 
     stages {

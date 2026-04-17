@@ -76,12 +76,12 @@ spec:
 
                         script {
                             sh """
-                            sed -i "s|${REGISTRY}/${PROJECT}/${IMAGE}:.*|${REGISTRY}/${PROJECT}/${IMAGE}:${env.BUILD_NUMBER}|g" yaml/nginx-deployment.yaml
+                            sed -i "s|${REGISTRY}/${PROJECT}/${IMAGE}:.*|${REGISTRY}/${PROJECT}/${IMAGE}:${env.BUILD_NUMBER}|g" backend/backend-deployment.yaml
             
                             if [ -n "\$(git status --porcelain)" ]; then
                                 git config user.email "jenkins@test.com"
                                 git config user.name "jenkins"
-                                git add yaml/nginx-deployment.yaml
+                                git add backend/backend-deployment.yaml
                                 git commit -m "chore: update image tag to ${env.BUILD_NUMBER} [skip ci]"
                                 git push origin main
                             fi

@@ -5,8 +5,9 @@ import time
 error_data= { "name": "nginx-pod"}
 
 for pod in error_data:
-  if pod["status"] == "Running":
-    print('정상입니다')
+  print(pod)
+  #  if pod["status"] == "Running":
+#    print('정상입니다')
 
 
 

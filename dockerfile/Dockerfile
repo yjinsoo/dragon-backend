@@ -1,5 +1,9 @@
 FROM python:3.9-slim
 
+# 파이썬은 기본적으로 효율을 위해서 버퍼에 쌓아두고 한번에 출력하려하기때문에, 해당 옵션을 아예 끄기
+# Pod log 즉각 출력을 하기 위함
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
 # Flask 설치

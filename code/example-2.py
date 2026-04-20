@@ -8,7 +8,8 @@ students = [
 ]
 
 
-print(students[0].scores[
+for stu in students:
+    
 
 print("======== end ==========")
 while true:

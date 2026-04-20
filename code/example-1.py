@@ -12,7 +12,7 @@ def check_inventory(item_list):
       if item_list["count"] == 0:
           return "품절"
       elif item_list["count"] <= 3:
-          return" 재입고 필요"
+          return"재입고 필요"
       else:
           return "판매 중"
   except Exception as e:

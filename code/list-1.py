@@ -25,4 +25,4 @@ print(pod_inf["memory"])
 pod_info["memory"] = "256Mi"
 
 #확인
-print(pod_inf["memory"])
+print(pod_info["memory"])

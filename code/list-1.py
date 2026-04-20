@@ -19,7 +19,7 @@ pod_info = {
 
 #데이터 꺼내기
 print(pod_info["name"]) #결과 : nginx-pod
-print(pod_inf["memory"]) 
+print(pod_info["memory"]) 
 
 #데이터 수정 및 추가
 pod_info["memory"] = "256Mi"

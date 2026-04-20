@@ -9,7 +9,12 @@ students = [
 
 
 for stu in students:
-    
+    try:
+        total=sum(stu["scores"])
+        length=len(stu["scores"])
+        print(f"{stu['name']} 의 평균점수는 {total/length}")
+    except Exception as e:
+        print(f"Error check {e}")
 
 print("======== end ==========")
 while true:

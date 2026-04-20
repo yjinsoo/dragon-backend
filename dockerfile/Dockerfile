@@ -6,10 +6,10 @@ WORKDIR /app
 # RUN pip install --no-cache-dir flask flask-cors
 
 # 소스코드 복사
-COPY code/loop-condition.py .
+COPY code/function.py .
 
 # Flask 포트
-EXPOSE 5000
+#EXPOSE 5000
 
 # 실행
-CMD ["python", "loop-condition.py"]
+CMD ["python", "function.py"]

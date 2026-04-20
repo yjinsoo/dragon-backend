@@ -25,9 +25,7 @@ def check_cpu (pod):
   except Exception as e:
     return f"Error check {e}"
     
-error_data= [
-  { "name": "nginx-pod" }
-]
+error_data= { "name": "nginx-pod" }
 
 print(check_cpu(error_data))
 

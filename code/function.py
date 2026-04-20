@@ -7,6 +7,14 @@ def check_cpu(pod_name, cpu_value):
   else:
     return f" {pod_name} 정상!"
 
+# And연산자를 포함한 함수
+# 매개변수로 함수 딕셔너리를 던져줌
+def check_status_and_cpu(pod):
+  if pod["status"] == "Running" and pod["cpu_usage"] >= 80:
+    return "Emergency"
+  return "Normal"
+  
+
 cluster_status = [
     {"name": "web-api", "status": "Running", "cpu_usage": 85, "memory": "256Mi"},
     {"name": "db-primary", "status": "Running", "cpu_usage": 30, "memory": "1Gi"},
@@ -19,6 +27,12 @@ cluster_status = [
 for pod in cluster_status:
   result=check_cpu(pod["name"],pod["cpu_usage"])
   print(result)
+
+for pod in cluster_status:
+  result=check_status_and_cpu(pod)
+  print(f"{pod['name']} -> Result: {result}")
+
+
 
 print("--- 모든 검사가 끝났습니다. Pod를 유지합니다. ---")
 while True:

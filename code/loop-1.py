@@ -34,7 +34,7 @@ for pod in my_cluster:
   if pod["status"] == "Error":
     print(f"현재 pod상태이상 NAME: {pod['name']}, ID: {pod['id']}")
   else:
-    print(f"정상 pod NAME: {pod['name]'}, ID: {pod['id']}")
+    print(f"정상 pod NAME: {pod['name']}, ID: {pod['id']}")
 
 
 

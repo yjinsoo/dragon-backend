@@ -20,18 +20,23 @@ cluster_status = [
     {"name": "auth-service", "status": "Running", "cpu_usage": 92, "memory": "128Mi"}
 ]
 
+#def check_cpu (pod):
+#  try:
+#    if pod["status"] == "Running" and pod["cpu_usage"] >= 80:
+#      return "Emergency"
+#    return "Normal"
+#  #key가 에러 처리
+#  except KeyError as e:
+#    return f"Data Error {e} key가 존재하지 않음"
+#  #그 외 모든 error 처리
+#  except Exception as e:
+#    return f"Error check {e}"
+
 def check_cpu (pod):
-  try:
     if pod["status"] == "Running" and pod["cpu_usage"] >= 80:
       return "Emergency"
     return "Normal"
-  #key가 에러 처리
-  except KeyError as e:
-    return f"Data Error {e} key가 존재하지 않음"
-  #그 외 모든 error 처리
-  except Exception as e:
-    return f"Error check {e}"
-    
+
 for pod in cluster_status:
   print(check_cpu(pod))
 

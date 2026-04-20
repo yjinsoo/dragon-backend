@@ -15,7 +15,11 @@ def check_inventory(item_list):
           return" 재입고 필요"
       else:
           return "판매 중"
-  exception:
+  except Exception as e
+    return f"error 확인 필요 {e}"
+
+for inven in inventory:
+    print(check_inventory(inven))
     
 
 print("--- 모든 검사가 끝났습니다. Pod를 유지합니다. ---")

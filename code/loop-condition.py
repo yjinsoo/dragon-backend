@@ -14,3 +14,11 @@ for pod in cluster_status:
 for pod in cluster_status:
     if pod["status"] == "Running":
         print(f"{pod['name']} (상태: {pod['status']})")
+
+#cpu_usage가 80%이상인 POD 골라내기
+for pod in cluster_status:
+    if pod["cpu_usage"] > 80:
+        print(f"{pod['name']} (상태: {pod['status']}) - CPU: {pod['cpu_usage']}% [과부하]")
+    else:
+        print(f"{pod['name']} (상태: {pod['status']}) - CPU: {pod['cpu_usage']}")
+

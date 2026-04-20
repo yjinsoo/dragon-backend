@@ -29,7 +29,7 @@ print(pod_info["memory"])
 
 
 # 리스트 안에 딕셔너리
-my_cluaster=[
+my_cluster=[
   {"id":1, "name": "auth-pod", "status": "Running"},
   {"id":2, "name": "payment-pod", "status": "Pending"},
   {"id":3, "name": "search-pod", "status": "Error"}

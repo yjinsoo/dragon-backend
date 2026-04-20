@@ -40,6 +40,20 @@ for pod in my_cluster:
 new_pod = {"id":4, "name": "nginx-pod", "status": "Running"}
 my_cluster.append(new_pod)
 
+#2. 반복문과 조건문으로 홀수 ID 찾기
+for pod in my_cluster:
+  if pod["id"] % 2 != 0:
+    print(f"ID가 홀수인 pod입니다 {pod['name']},{pod['id']},{pod['status']}")
+  else:
+    print(f"ID가 짝수인 pod입니다 {pod['name']},{pod['id']},{pod['status']}")
+
+
+
+
+
+
+
+
 
 
 

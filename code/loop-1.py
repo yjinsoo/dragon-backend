@@ -36,5 +36,10 @@ for pod in my_cluster:
   else:
     print(f"정상 pod NAME: {pod['name']}, ID: {pod['id']}")
 
+#새로운 딕셔너리 추가
+new_pod = {"id":4, "name": "nginx-pod", "status": "Running"}
+my_cluster
+
+
 
 

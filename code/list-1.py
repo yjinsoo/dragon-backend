@@ -1,6 +1,6 @@
 #리스트 만들기
 pods = ["web-server", "db-server", "cache-server"]
-
+score = [80, 90, 85]
 #데이터 꺼내기
 print(pods[0]) #결과 : web-server (첫번째 요소)
 print(pods[-1])  # 결과 : cache-server (마지막 요소)
@@ -8,6 +8,9 @@ print(pods[-1])  # 결과 : cache-server (마지막 요소)
 #데이터 추가하기
 pods.append("api-server") # 맨 뒤에 추가됨
 
+sum_score=sum(score)
+len_score=len(score)
+print(f"평균 {sum_score/len_score}")
 
 #딕셔너리 만들기 key, value형식
 pod_info = {

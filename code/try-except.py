@@ -12,6 +12,13 @@ import time
 #  File "/app/try-except.py", line 8, in <module>
 #    if pod["status"] == "Running":
 #KeyError: 'status'
+cluster_status = [
+    {"name": "web-api", "status": "Running", "cpu_usage": 85, "memory": "256Mi"},
+    {"name": "db-primary", "status": "Running", "cpu_usage": 30, "memory": "1Gi"},
+    {"name": "cache-node", "status": "Error", "cpu_usage": 0, "memory": "0Mi"},
+    {"name": "batch-worker"},
+    {"name": "auth-service", "status": "Running", "cpu_usage": 92, "memory": "128Mi"}
+]
 
 def check_cpu (pod):
   try:
@@ -25,10 +32,8 @@ def check_cpu (pod):
   except Exception as e:
     return f"Error check {e}"
     
-error_data= { "name": "nginx-pod" }
-
-print(check_cpu(error_data))
-
+for pod in cluster_status:
+  print(check_cpu(pod))
 
 print("--- 모든 검사가 끝났습니다. Pod를 유지합니다. ---")
 while True:

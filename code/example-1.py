@@ -15,7 +15,7 @@ def check_inventory(item_list):
           return" 재입고 필요"
       else:
           return "판매 중"
-  except Exception as e
+  except Exception as e:
     return f"error 확인 필요 {e}"
 
 for inven in inventory:

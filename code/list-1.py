@@ -26,3 +26,15 @@ pod_info["memory"] = "256Mi"
 
 #확인
 print(pod_info["memory"])
+
+
+# 리스트 안에 딕셔너리
+my_cluaster=[
+  {"id":1, "name": "auth-pod", "status": "Running"},
+  {"id":2, "name": "payment-pod", "status": "Pending"},
+  {"id":3, "name": "search-pod", "status": "Error"}
+]
+
+#id 3의 pod이름 출력
+print(my_cluster[2]["name"])
+

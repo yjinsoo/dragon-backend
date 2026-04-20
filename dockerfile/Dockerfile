@@ -10,10 +10,10 @@ WORKDIR /app
 # RUN pip install --no-cache-dir flask flask-cors
 
 # 소스코드 복사
-COPY code/example-1.py .
+COPY code/list-1.py .
 
 # Flask 포트
 #EXPOSE 5000
 
 # 실행
-CMD ["python", "example-1.py"]
+CMD ["python", "list-1.py"]

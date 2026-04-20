@@ -2,12 +2,11 @@ import time
 
 #에러 만들기
 #key값이 없는 경우
-error_data= { "name": "nginx-pod"}
+error_data= [{ "name": "nginx-pod" }]
 
 for pod in error_data:
-  print(pod)
-  #  if pod["status"] == "Running":
-#    print('정상입니다')
+  if pod["status"] == "Running":
+    print('정상입니다')
 
 
 

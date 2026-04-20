@@ -12,7 +12,7 @@ for stu in students:
     try:
         total=sum(stu["scores"])
         length=len(stu["scores"])
-        score_avg = sum / len
+        score_avg = total / length
         if score_avg >= 90:
             print(f"장학금 대상자 {stu['name']}, 평균점수 {score_avg}")
     except Exception as e:

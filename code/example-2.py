@@ -12,9 +12,9 @@ for stu in students:
     try:
         total=sum(stu["scores"])
         length=len(stu["scores"])
-        score_avg=sum/len
-        if score >= 90:
-            print(f"장학금 대상자 {stu['name']}, 평균점수 {score}")
+  #      score_avg=sum/len
+        if total/length >= 90:
+            print(f"장학금 대상자 {stu['name']}, 평균점수 {total/length}")
     except Exception as e:
         print(f"Error check {e}")
 

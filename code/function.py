@@ -17,7 +17,8 @@ cluster_status = [
 
 
 for pod in cluster_status:
-  check_cpu(pod["name"],pod["cpu_usage"])
+  result=check_cpu(pod["name"],pod["cpu_usage"])
+  print(result)
 
 print("--- 모든 검사가 끝났습니다. Pod를 유지합니다. ---")
 while True:

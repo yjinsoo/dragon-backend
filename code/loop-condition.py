@@ -8,4 +8,9 @@ cluster_status = [
 
 #for문을 사용하여 전체 Pod검사
 for pod in cluster_status:
-  print(f"POD name:{pod['name']}, Pod Status:{pod['status']}, POD cpu_usage: {pod['cpu_usage']}, Pod memory_usage: {pod['memory']}
+  print(f"POD name:{pod['name']}, Pod Status:{pod['status']}, POD cpu_usage: {pod['cpu_usage']}, Pod memory_usage: {pod['memory']}")
+
+#if문을 사용해 status가 "Running"인 Pod만 골라내기
+for pod in cluster_status:
+    if pod["status"] == "Running":
+        print(f"{pod['name']} (상태: {pod['status']})")

@@ -9,10 +9,14 @@ inventory = [
 
 def check_inventory(item_list):
   try:
-  if item_list["count"] == 0:
-    return "품절"
-  elif item_list["count"] <= 3:
-    return" 재입고 필요
+      if item_list["count"] == 0:
+          return "품절"
+      elif item_list["count"] <= 3:
+          return" 재입고 필요"
+      else:
+          return "판매 중"
+  exception:
+    
 
 print("--- 모든 검사가 끝났습니다. Pod를 유지합니다. ---")
 while True:

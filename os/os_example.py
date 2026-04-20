@@ -9,6 +9,8 @@ APP_PORT라는 이름의 환경 변수를 읽어옵니다. (기본값은 8080)
 
 import os,time
 
+# 기본적으로 환경변수로 읽어오는 것은 문자열이다
+# 즉, port도 문자열로 인식
 app_env = os.environ.get("APP_ENV","development")
 app_port = os.environ.get("APP_PORT","8080")
 

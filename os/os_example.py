@@ -9,7 +9,18 @@ APP_PORT라는 이름의 환경 변수를 읽어옵니다. (기본값은 8080)
 
 import os,time
 
-app_env = os.environ
+app_env = os.environ.get("APP_ENV","development")
+app_port = os.environ.get("APP_PORT",8080)
+
+try:
+  if app_env == "production":
+    print("운영서버 가동 - 보안에 주의하세요")
+  else:
+    print("개발 모드 실행 중")
+except Exception as e:
+  print(f"Error check {e}")
+
+print(f"서버 포트: {app_port}")
 
 
 

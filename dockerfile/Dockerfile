@@ -10,10 +10,10 @@ WORKDIR /app
 # RUN pip install --no-cache-dir flask flask-cors
 
 # 소스코드 복사
-COPY code/try-except.py .
+COPY code/example-1.py .
 
 # Flask 포트
 #EXPOSE 5000
 
 # 실행
-CMD ["python", "try-except.py"]
+CMD ["python", "example-1.py"]

@@ -11,8 +11,11 @@ raw_logs = [
 for log in raw_logs:
   try:
     split_data=log.split(":")
-    for split in split_data:
-      print(split)
+    if len(split_data) < 2:
+        print(f"정상로그 아님 {log}")
+        continue
+    print(f"{split_data[0]},{split_data[1]},{split_data[2]}")
+    
   except Exception as e:
     print(f"error {e}")
 

@@ -10,7 +10,7 @@ APP_PORT라는 이름의 환경 변수를 읽어옵니다. (기본값은 8080)
 import os,time
 
 app_env = os.environ.get("APP_ENV","development")
-app_port = os.environ.get("APP_PORT",8080)
+app_port = os.environ.get("APP_PORT","8080")
 
 try:
   if app_env == "production":

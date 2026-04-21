@@ -12,6 +12,8 @@ import time,os
 
 app_env = os.environ.get("APP_ENV","development")
 
+if app_env == "production":
+  os.
 
 print("==========END==========")
 while True:

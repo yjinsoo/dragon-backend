@@ -21,11 +21,16 @@ dev_file = "logs_dev"
 try:
   if app_env == "production" and not os.path.exist(prd_file): 
     os.makedirs(prd_file)
+    current_dir = os.listdir(".")
+    print(current_dir)
   elif app_env == "development" and not os.path.exist(dev_file):
     os.makedirs(dev_file)
+    current_dir = os.listdir(".")
+    print(current_dir)
   else:
     print("조건에 맞는 환경변수가 없습니다")
-  
+except Exceptin as e:
+  print(f"Error check {e}")
 
 print("==========END==========")
 while True:

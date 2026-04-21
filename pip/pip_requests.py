@@ -9,10 +9,12 @@ from pprint import pprint
 try:
   #1. 특정 주소에 GET 요청(데이터 달라고 하기)을 보냄
   response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+
+  print(dir(response))
   
   #2. 응답받은 데이터 파이썬 딕셔너리로 변경
   data = response.json()
-  
+
   ## key를 모를 때 데이터 확인
   pprint(data)
   

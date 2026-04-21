@@ -19,7 +19,7 @@ current_dir = os.listdir(".")
 count = 0
 for item in current_dir:
   try:
-    if ".py" in itme:
+    if ".py" in item:
       count += 1
   except Exception as e:
     print(f"Error check {e}")

@@ -16,7 +16,8 @@ else:
   print(f"{folder_name}폴더가 이미 존재합니다.")
 
 current_dir = os.listdir(".")
-print(f"현재 폴더 파일 목록: {current_dir}")
+for list in current_dir:
+  print(f"파일 : {list}")
 
 
 print("========end========")

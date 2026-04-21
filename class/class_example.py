@@ -23,7 +23,11 @@ class Pod:
       return False
   
 object01 = Pod("DB-Pod",90)
-print(object01.is_overload())
+try:
+  if object01.is_overload():
+    print(f"경고: {object01.name} 과부하!")
+except Exception as e:
+  print(f"Error check {e}")
 
 
 print("==========END==========")

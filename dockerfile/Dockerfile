@@ -9,11 +9,14 @@ WORKDIR /app
 # Flask 설치
 # RUN pip install --no-cache-dir flask flask-cors
 
+#requests 설치
+RUN pip install --no-cache-dir requests
+
 # 소스코드 복사
-COPY os/oc_checkfile_example.py .
+COPY pip/pip_requests.py .
 
 # Flask 포트
 #EXPOSE 5000
 
 # 실행
-CMD ["python", "oc_checkfile_example.py"]
+CMD ["python", "pip_requests.py"]

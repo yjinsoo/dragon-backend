@@ -25,7 +25,7 @@ try:
     print(current_dir)
   else:
     print("조건에 맞는 환경변수가 없습니다")
-except Exceptin as e:
+except Exception as e:
   print(f"Error check {e}")
 
 print("==========END==========")

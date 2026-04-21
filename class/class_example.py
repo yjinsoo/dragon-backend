@@ -12,7 +12,7 @@ class Pod:
       return False
   
 object01 = Pod("DB-Pod",90)
-object01.is_overload()
+print(object01.is_overload())
 
 
 print("==========END==========")

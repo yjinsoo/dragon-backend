@@ -16,8 +16,15 @@ else:
   print(f"{folder_name}폴더가 이미 존재합니다.")
 
 current_dir = os.listdir(".")
+count = 0
 for list in current_dir:
-  print(f"파일 : {list}")
+  try:
+    if ".py" in list:
+      count = count + 1
+  except Exception as e:
+    print("Error check {e}")
+
+print(f"발견된 파이썬 파일 개수: {count}개")
 
 
 print("========end========")

@@ -14,10 +14,10 @@ WORKDIR /app
 RUN pip install --no-cache-dir requests httpx
 
 # 소스코드 복사
-COPY pip/pip_requests.py .
+COPY asyncio/sync_sample.py .
 
 # Flask 포트
 #EXPOSE 5000
 
 # 실행
-CMD ["python", "pip_requests.py"]
+CMD ["python", "sync_sample.py"]

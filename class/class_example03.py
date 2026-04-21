@@ -30,6 +30,15 @@ class Pod_status:
       else:
         return "OK"
     except Exception as e:
+        print (f"Error check {e}")
+
+r0=Pod_status(raw_data[0]["name"],raw_data[0]["cpu"])
+r1=Pod_status(raw_data[1]["name"],raw_data[1]["cpu"])
+r2=Pod_status(raw_data[2]["name"],raw_data[2]["cpu"])
+
+print(r0.get_status())
+print(r1.get_status())
+print(r2.get_status())
 
 
 print("==========END==========")

@@ -21,3 +21,6 @@ file_C: 3초 소요
 '''
 
 import time, asyncio
+
+async def download_file(filename, duration):
+  

@@ -8,10 +8,6 @@
 폴더를 만들기 전에 이미 존재하는지 확인하는 로직을 포함하세요. (os.path.exists)
 '''
 
-if not os.path.exists(folder_name):
-  os.makedirs(folder_name)
-
-
 import time,os
 
 app_env = os.environ.get("APP_ENV","development")

@@ -10,7 +10,7 @@
 
 import time,os
 
-app_env = os.environ.
+app_env = os.environ.get("APP_ENV","development")
 
 
 print("==========END==========")

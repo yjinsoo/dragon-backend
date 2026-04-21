@@ -30,9 +30,19 @@ async def main():
   
   #두 개의 작업을 동시에 던집니다!
   await asyncio.gather(
-    say_hello("API-1",3),
-    say_hello("API-2",1)
+    say_hello("API-1",10),
+    say_hello("API-2",5)
   )
   print("--- 전체 작업 종료 ---")
 
 asyncio.run(main())
+
+'''
+출력
+--- 전체 작업 시작 ---
+[API-1] 요청 시작 ...
+[API-2] 요청 시작 ...
+[API-2] 1초 만에 응답 완료!
+[API-1] 3초 만에 응답 완료!
+--- 전체 작업 종료 ---
+'''

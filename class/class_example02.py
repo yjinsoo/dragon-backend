@@ -15,11 +15,11 @@ prd_file = "logs_prod"
 dev_file = "logs_dev"
 
 try:
-  if app_env == "production" and not os.path.exist(prd_file): 
+  if app_env == "production" and not os.path.exists(prd_file): 
     os.makedirs(prd_file)
     current_dir = os.listdir(".")
     print(current_dir)
-  elif app_env == "development" and not os.path.exist(dev_file):
+  elif app_env == "development" and not os.path.exists(dev_file):
     os.makedirs(dev_file)
     current_dir = os.listdir(".")
     print(current_dir)

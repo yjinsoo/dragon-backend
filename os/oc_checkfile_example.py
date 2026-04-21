@@ -22,7 +22,7 @@ for item in current_dir:
     if ".py" in itme:
       count += 1
   except Exception as e:
-    print("Error check {e}")
+    print(f"Error check {e}")
 
 print(f"발견된 파이썬 파일 개수: {count}개")
 

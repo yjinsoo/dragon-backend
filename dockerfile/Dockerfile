@@ -13,10 +13,10 @@ WORKDIR /app
 RUN pip install --no-cache-dir requests
 
 # 소스코드 복사
-COPY class/class_sample.py .
+COPY class/class_example.py .
 
 # Flask 포트
 #EXPOSE 5000
 
 # 실행
-CMD ["python", "class_sample.py"]
+CMD ["python", "class_example.py"]

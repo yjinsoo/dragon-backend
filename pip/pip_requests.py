@@ -11,7 +11,10 @@ try:
   response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
 
   print(dir(response))
-  
+
+  for check_item in response:
+    print("리스트 내 내용확인")
+    pprint(check_item)
   #2. 응답받은 데이터 파이썬 딕셔너리로 변경
   data = response.json()
 

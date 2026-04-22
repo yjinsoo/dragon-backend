@@ -43,6 +43,8 @@ async def main():
 
 asyncio.run(main())
 
+'''
+동기식과 시간비교
   
 
 

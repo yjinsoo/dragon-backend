@@ -23,13 +23,13 @@ file_C: 3초 소요
 import time, asyncio
 
 async def download_file(filename, duration):
-  print(f"{filename} 다운로드 시작 ...")
+  print(f"async: {filename} 다운로드 시작 ...")
   await asyncio.sleep(duration)
-  print(f"{filename} 다운로드 완료! ({duration}초 소요)")
+  print(f"async: {filename} 다운로드 완료! ({duration}초 소요)")
 
 async def main():
   start_time = time.time()
-  print(f"---전체 작업 시작 --- 시작시간 : {time.strftime('%X')}")
+  print(f"async:---전체 작업 시작 --- 시작시간 : {time.strftime('%X')}")
 
   await asyncio.gather(
     download_file("file_A",5),
@@ -38,13 +38,34 @@ async def main():
   )
   end_time = time.time()
   work_time = end_time - start_time
-  print(f"---전체 작업 종료 --- 종료시간 : {time.strftime('%X')}")
-  print(f"소요시간 {work_time:.2f} 초")
+  print(f"async:---전체 작업 종료 --- 종료시간 : {time.strftime('%X')}")
+  print(f"async:소요시간 {work_time:.2f} 초")
 
 asyncio.run(main())
 
 '''
 동기식과 시간비교
+'''
+
+def download_file_sync(filename, duration):
+  print(f"sync : {filename} 다운로드 시작 ...")
+  time.sleep(duration)
+  print(f"sync: {filename} 다운로드 완료! ({duration}초 소요)")
+
+def main_sync():
+  start_time = time.time()
+  print(f"sync:---전체 작업 시작 --- 시작시간 : {time.strftime('%X')}")
+
+  download_file_sync("file_A",5)
+  download_file_sync("file_B",2)
+  download_file_sync("file_C",3)
   
+  end_time = time.time()
+  work_time = end_time - start_time
+  print(f"sync:---전체 작업 종료 --- 종료시간 : {time.strftime('%X')}")
+  print(f"sync:소요시간 {work_time:.2f} 초")
 
+run(main_sync())
 
+while True:
+  time.sleep(60)

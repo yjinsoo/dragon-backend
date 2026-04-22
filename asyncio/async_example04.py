@@ -17,6 +17,9 @@ import time
 async def fetch_speed(client, name, url):
     start = time.time()
     # 1. 여기서 비동기로 url에 접속하세요 (await 사용)
+    await client.get(url)
+
+    end = time.time()
     # 2. 소요 시간을 계산하세요
     return f"{name}: {duration:.4f}s"
 

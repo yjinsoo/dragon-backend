@@ -27,8 +27,13 @@ async def main():
         "Daum": "https://www.daum.net"
     }
     
+    
     async with httpx.AsyncClient() as client:
         # 3. 여기서 tasks 리스트를 만들고 gather로 실행하세요
-        pass
+        tasks = [fetch_speed(cllent,name,url) for name, url in urls.items()]
+        results = await asyncio.gather(*tasks)
 
+    for res in results:
+        print(res)
+        
 asyncio.run(main())

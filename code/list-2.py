@@ -7,7 +7,7 @@ pod_info = {
   "memory": "128Mi"
 }
 
-for name,value in pod_info.itmes():
+for name,value in pod_info.items():
   print(f"key:{name}, value:{value}")
   
 while True:

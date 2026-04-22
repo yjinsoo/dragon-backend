@@ -65,7 +65,7 @@ def main_sync():
   print(f"sync:---전체 작업 종료 --- 종료시간 : {time.strftime('%X')}")
   print(f"sync:소요시간 {work_time:.2f} 초")
 
-run(main_sync())
+main_sync()
 
 while True:
   time.sleep(60)

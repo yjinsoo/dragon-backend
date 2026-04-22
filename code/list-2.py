@@ -1,3 +1,5 @@
+import time
+
 pod_info = {
   "name" : "nginx-pod",
   "image" : "nginx:latest",
@@ -8,3 +10,5 @@ pod_info = {
 for name,value in pod_info.itmes():
   print(f"key:{name}, value:{value}")
   
+while True:
+  time.sleep(60)

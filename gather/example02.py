@@ -42,11 +42,15 @@ async def main():
     {"resource":"CPU", "time":2}
   ]
 
-  os.getlogin()
+ # os.getlogin()  => 컨테이너 환경이라 적절하지 않음
+
+  print("xx님이 생성을 시작합니다")
   
   tasks = [provision_resource(item["resource"], item["time"]) for item in setting_resource]
 
   await asyncio.gather(*tasks)
+
+  print(f"Server Name: {Instance.name}, Memory: {Instance.ram}, CPU: {Instance.cpu} 생성완료!"
 
 
 

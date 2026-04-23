@@ -15,7 +15,7 @@ provision_resource를 사용해 다음 두 작업을 동시에(gather) 실행하
 '''
 
 
-import os, time
+import os, time, asyncio
 
 
 class Instance:
@@ -25,11 +25,19 @@ class Instance:
     self.ram = ram
 
 
+async def provision_resource(resource_name, delay):
+  print(f"{resource_name} 설정 ({deploy}초 소요)")
+  await asyncio.sleep(delay)
+
+
 async def main():
   instance = [
     Instance("web-server",2,4),
     Instance("db-server",4, 8)
   ]
+
+  setting_resource = [
+
 
 
 if __init__ == __main__:

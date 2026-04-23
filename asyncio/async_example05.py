@@ -29,7 +29,7 @@ async def check_db_connection():
 async def main():
     print("--- DB 점검 시작 ---")
     
-    result = await check_db_connetion()
+    result = await check_db_connection()
     
     print(f"최종 결과: {result}")
     print("--- 점검 종료 ---")

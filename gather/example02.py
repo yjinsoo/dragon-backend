@@ -31,4 +31,8 @@ async def main():
     Instance("db-server",4, 8)
   ]
 
+
+if __init__ == __main__:
+  asyncio.run(main())
+
   

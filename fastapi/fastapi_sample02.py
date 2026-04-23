@@ -53,6 +53,6 @@ async def delete_project(name: str = "temp-project", force: bool = "False"):
 
   return  {
     "message" : "project 삭제 완료",
-    "elapsed_time" : f"{start - end }s"
+    "elapsed_time" : f"{ end - start }s"
   }
     

@@ -16,10 +16,10 @@ async def check_db_connection(client, name, url):
     await asyncio.sleep(0.5)
     response = await client.get(url)
     if response.status_code == 200:
-      return True
+      return print(f"{name}")
     else:
-      print "재시도 중..."
-  return print("최종 실패")
+      print(f"{name} 재시도 중...")  
+  return print(f"{name} 최종 실패")
 
 
 async def main():

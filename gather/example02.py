@@ -50,7 +50,7 @@ async def main():
 
   await asyncio.gather(*tasks)
 
-  print(f"Server Name: {Instance.name}, Memory: {Instance.ram}, CPU: {Instance.cpu} 생성완료!"
+  print(f"Server Name: {Instance.name}, Memory: {Instance.ram}, CPU: {Instance.cpu} 생성완료!")
 
 
 

@@ -36,10 +36,13 @@ async def main():
     Instance("db-server",4, 8)
   ]
 
-  setting_resource = ["disk", "memory", "cpu"]
-  delay_resource = [3,2,5]
+  setting_resource = [
+    {"resource":"memory", "time":3},
+    {"resource":"disk", "time":5},
+    {"resource":"cpu", "time":2}
+  ]
 
-  tasks = [provision_resource(resource_name, delay) for resource, deplay in setting_resource.items(),delay_resource.items()]
+  tasks = [provision_resource(item["resource"], item["time"]) for item in setting_resource]
 
   await asyncio.gather(*tasks)
 

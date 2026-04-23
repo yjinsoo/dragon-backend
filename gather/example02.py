@@ -31,10 +31,8 @@ async def provision_resource(resource_name, delay):
 
 
 async def main():
-  instance = [
-    Instance("web-server",2,4),
-    Instance("db-server",4, 8)
-  ]
+  instance = Instance("web-server",2,4),
+ 
 
   setting_resource = [
     {"resource":"Memory", "time":3},
@@ -50,7 +48,7 @@ async def main():
 
   await asyncio.gather(*tasks)
 
-  print(f"Server Name: {Instance.name}, Memory: {Instance.ram}, CPU: {Instance.cpu} 생성완료!")
+  print(f"Server Name: {instance.name}, Memory: {instance.ram}, CPU: {instance.cpu} 생성완료!")
 
 
 

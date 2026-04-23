@@ -26,7 +26,7 @@ class Instance:
 
 
 async def provision_resource(resource_name, delay):
-  print(f"{resource_name} 설정 ({deploy}초 소요)")
+  print(f"{resource_name} 설정 ({delay}초 소요)")
   await asyncio.sleep(delay)
 
 

@@ -11,7 +11,10 @@ WORKDIR /app
 
 #requests 설치
 # 비동기 전용 라이브러리 httpx 추가 설치
-RUN pip install --no-cache-dir requests httpx
+#RUN pip install --no-cache-dir requests httpx
+
+#fastapi 사용을 위한 라이브러리 설치
+RUN pip install fastapi uvicorn
 
 # 소스코드 복사
 COPY gather/example02.py .

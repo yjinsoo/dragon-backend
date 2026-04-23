@@ -31,7 +31,7 @@ async def main():
   }
 
   async with httpx.AsyncClient() as client:
-    tasks = [check_db_connection(client, name, url) for name, url in services.itmes()]
+    tasks = [check_db_connection(client, name, url) for name, url in services.items()]
     await asyncio.gather(*tasks)
 
                          

@@ -32,7 +32,7 @@ async def main():
 
   async with httpx.AsyncClient() as client:
     tasks = [check_db_connection(client, name, url) for name, url in services.time()]
-    await asyncio.gather{*tasks)
+    await asyncio.gather(*tasks)
 
                          
 asyncio.run(main())

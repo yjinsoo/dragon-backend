@@ -14,10 +14,10 @@ WORKDIR /app
 RUN pip install --no-cache-dir requests httpx
 
 # 소스코드 복사
-COPY gather/example01.py .
+COPY gather/example02.py .
 
 # Flask 포트
 #EXPOSE 5000
 
 # 실행
-CMD ["python", "example01.py"]
+CMD ["python", "example02.py"]

@@ -36,11 +36,16 @@ async def main():
     Instance("db-server",4, 8)
   ]
 
-  setting_resource = [
+  setting_resource = ["disk", "memory", "cpu"]
+  delay_resource = [3,2,5]
+
+  tasks = [provision_resource(resource_name, delay) for resource, deplay in setting_resource.itmes(),delay_resource.items()]
+
+  await asyncio.gather(*tasks)
 
 
 
-if __init__ == __main__:
+if __init__ == "__main__":
   asyncio.run(main())
 
   

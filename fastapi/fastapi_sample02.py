@@ -15,7 +15,7 @@ delete_db는 2초, delete_storage는 1초가 소요됩니다. (asyncio.sleep 사
 from fastapi import FastAPI
 import asyncio, time
 
-app = fastapi()
+app = FastAPI()
 
 class Project:
   def __init__(self, name, force):

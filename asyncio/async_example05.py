@@ -12,6 +12,8 @@ import time,asyncio,httpx
 
 
 async def check_db_connection(client, name, url):
+  await asyncio.sleep(0.5)
+  for i in range
 
 
 
@@ -27,6 +29,7 @@ async def main():
     tasks = [check_db_connection(client, name, url) for name, url in services.time()]
     await asyncio.gather{*tasks)
 
+                         
 asyncio.run(main())
 
     

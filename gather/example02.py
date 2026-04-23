@@ -31,7 +31,7 @@ async def provision_resource(resource_name, delay):
 
 
 async def main():
-  instance = Instance("web-server",2,4),
+  instance = Instance("web-server",2,4)
  
 
   setting_resource = [

@@ -38,7 +38,7 @@ async def delete_project(name: str = "temp-project", force: bool = "False"):
   target_project = Project(name,force)
 
   tasks = [ delete_db(), delete_storage() ]
-  print(f"Project: {target_project.name}을 삭제합니다. 강제여부: {target_project.focre}")
+  print(f"Project: {target_project.name}을 삭제합니다. 강제여부: {target_project.force}")
 
   try:
     if target_project.force:

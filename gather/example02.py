@@ -37,11 +37,13 @@ async def main():
   ]
 
   setting_resource = [
-    {"resource":"memory", "time":3},
-    {"resource":"disk", "time":5},
-    {"resource":"cpu", "time":2}
+    {"resource":"Memory", "time":3},
+    {"resource":"Disk", "time":5},
+    {"resource":"CPU", "time":2}
   ]
 
+  os.getlogin()
+  
   tasks = [provision_resource(item["resource"], item["time"]) for item in setting_resource]
 
   await asyncio.gather(*tasks)

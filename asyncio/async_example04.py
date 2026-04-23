@@ -20,6 +20,7 @@ async def fetch_speed(client, name, url):
     await client.get(url)
 
     end = time.time()
+    duration = end - start
     # 2. 소요 시간을 계산하세요
     return f"{name}: {duration:.4f}s"
 

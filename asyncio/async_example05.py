@@ -12,9 +12,14 @@ import time,asyncio,httpx
 
 
 async def check_db_connection(client, name, url):
-  await asyncio.sleep(0.5)
-  for i in range
-
+  for i in range(1,4):
+    await asyncio.sleep(0.5)
+    response = await client.get(url)
+    if response.status_code == 200:
+      return True
+    else:
+      print "재시도 중..."
+  return print("최종 실패")
 
 
 async def main():

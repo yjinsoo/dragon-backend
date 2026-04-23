@@ -18,5 +18,17 @@ provision_resource를 사용해 다음 두 작업을 동시에(gather) 실행하
 import os, time
 
 
-class Instance():
+class Instance:
+  def __init__(self, name, cpu, ram):
+    self.name = name
+    self.cpu =  cpu
+    self.ram = ram
+
+
+async def main():
+  instance = [
+    Instance("web-server",2,4),
+    Instance("db-server",4, 8)
+  ]
+
   

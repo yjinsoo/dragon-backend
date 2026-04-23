@@ -8,34 +8,33 @@ for 루프를 사용해 최대 3번 반복하며 접속을 시도하세요.
 
 '''
 
-import time,asyncio,httpx
+import asyncio
+import random
 
-
-async def check_db_connection(client, name, url):
-  for i in range(1,4):
-    await asyncio.sleep(0.5)
-    response = await client.get(url)
-    if response.status_code == 200:
-      return print(f"{name}")
-    else:
-      print(f"{name} 재시도 중...")  
-  return print(f"{name} 최종 실패")
-
+async def check_db_connection():
+    for i in range(1, 4):
+        print(f"📡 {i}번째 접속 시도 중...")
+        await asyncio.sleep(0.5)
+        
+        # 50% 확률로 성공 또는 실패 시뮬레이션
+        success = random.choice([True, False])
+        
+        if success:
+            return "✅ DB 접속 성공!"  # 성공하면 즉시 종료!
+        else:
+            print("❌ 접속 실패...")
+            
+    return "🚨 3회 시도 모두 실패 (점검 필요)" # for문이 다 끝나면 실행
 
 async def main():
-  services = {
-        "AUTH-API": "https://jsonplaceholder.typicode.com/posts/1",
-        "ORDER-API": "https://jsonplaceholder.typicode.com/posts/2",
-        "PAY-API": "https://jsonplaceholder.typicode.com/posts/3",
-        "INVENTORY-API": "https://invalid-url-test.com" # 에러 테스트용
-  }
+    print("--- DB 점검 시작 ---")
+    
+    result = await check_db_connetion()
+    
+    print(f"최종 결과: {result}")
+    print("--- 점검 종료 ---")
 
-  async with httpx.AsyncClient() as client:
-    tasks = [check_db_connection(client, name, url) for name, url in services.items()]
-    await asyncio.gather(*tasks)
-
-                         
-asyncio.run(main())
-
+if __name__ == "__main__":
+    asyncio.run(main())
     
     

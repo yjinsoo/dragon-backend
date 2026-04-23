@@ -41,8 +41,8 @@ async def delete_project(name: str = "temp-project", force: bool = "False"):
   print(f"Project: {target_project.name}을 삭제합니다. 강제여부: {target_project.focre}")
 
   try:
-    if target_project.focre:
-      await asyncio.gatcher(*taks)
+    if target_project.force:
+      await asyncio.gatcher(*tasks)
     else:
       await delete_db()
       await delete_storage()

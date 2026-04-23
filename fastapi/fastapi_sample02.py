@@ -14,3 +14,35 @@ delete_db는 2초, delete_storage는 1초가 소요됩니다. (asyncio.sleep 사
 
 from fastapi import FastAPI
 import asyncio, time
+
+app = fastapi()
+
+class Project:
+  def __init__(self, name, force):
+    self.name = name,
+    self.force = force
+
+async def delete_db():
+  print("DB삭제 진행, 소요시간: 2초")
+  await asyncio.sleep(2)
+  print("DB삭제 완료")
+  
+async def delete_storage():
+  print("Storage삭제 진행, 소요시간: 1초")
+  await asyncio.sleep(1)
+  print("Stroage삭제 완료")
+  
+@app.get("/delete-project")
+async def delete_project(name: str = "temp-project", force: bool = "False"):
+  start = time.time()
+  target_project = Project(name,force)
+  
+  print(f"Project: {target_project.name}을 삭제합니다. 강제여부: {target_project.focre}")
+
+  try:
+    if target_project.focre:
+      await asyncio.gatcher(
+
+
+  end = time.time()
+    

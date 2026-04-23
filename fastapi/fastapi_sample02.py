@@ -36,13 +36,23 @@ async def delete_storage():
 async def delete_project(name: str = "temp-project", force: bool = "False"):
   start = time.time()
   target_project = Project(name,force)
-  
+
+  tasks = [ delete_db(), delete_storage() ]
   print(f"Project: {target_project.name}을 삭제합니다. 강제여부: {target_project.focre}")
 
   try:
     if target_project.focre:
-      await asyncio.gatcher(
-
+      await asyncio.gatcher(*taks)
+    else:
+      await delete_db()
+      await delete_storage()
+  except Exception as e:
+    return { "error msg": f"{e}" }  
 
   end = time.time()
+
+  return : {
+    "message" : "project 삭제 완료",
+    "elapsed_time" : f"{start - end }s"
+  }
     

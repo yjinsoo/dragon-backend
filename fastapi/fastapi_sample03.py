@@ -32,7 +32,7 @@ async def notify_monitoring_center(project_name, user):
         res_data = response.json()
         if response.status_code == 200:
             print(f"📢 [Report] 모니터링 센터에 보고 완료: {project_name}")
-            print(f"{res_data['josn']}")
+            print(f"{res_data['json']}")
         return response.status_code
 
   

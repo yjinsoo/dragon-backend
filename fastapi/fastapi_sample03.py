@@ -16,8 +16,7 @@ async def notify_monitoring_center(project_name, user):
         res_data = response.json()
         if response.status_code == 200:
             print(f"📢 [Report] 모니터링 센터에 보고 완료: {project_name}")
-            for key,value in res_data.items():
-                print(f"{key}:{value}")
+            print(f"{res_data['josn']}")
         return response.status_code
 
 @app.get("/delete-project")

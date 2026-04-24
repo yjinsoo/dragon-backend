@@ -37,21 +37,15 @@ async def notify_monitoring_center(project_name, user):
 
   
 @app.get("/delete-project")
-async def delete_project(name: str = "temp-project", force: bool = False):
+async def delete_project(name: str = "temp-project"):
   start = time.time()
-  target_project = Project(name,force)
-  async_wether = 2
+  #target_project = Project(name,force)
 
-  tasks = [ delete_db(), delete_storage() , notify_monitoring_center(target_project.name, "admin_jinsoo") ]
-  print(f"Project: {target_project.name}을 삭제합니다. 강제여부: {target_project.force}")
+  tasks = [ delete_db(), delete_storage() , notify_monitoring_center(name, "admin_jinsoo") ]
+  print(f"Project: {name}을 삭제합니다.")
 
   try:
-    if target_project.force:
-      async_wether = 1
-      await asyncio.gather(*tasks)
-    else:
-      await asyncio.gather(delete_db(),notify_monitoring_center(target_project.name, "admin_jinsoo"))
-      await asyncio.gather(delete_storage(),notify_monitoring_center(target_project.name, "admin_jinsoo"))
+    await asyncio.gather(*tasks)
   except Exception as e:
     return { "error msg": f"{e}" }  
 
@@ -59,7 +53,6 @@ async def delete_project(name: str = "temp-project", force: bool = False):
 
   return  {
     "message" : "project 삭제 완료 및 외부 보고 완료",
-    "Force" : f"{target_project.force}",
     "async_wether" : f"{async_wether}",
     "elapsed_time" : f"{ end - start }s"
   }

@@ -53,6 +53,5 @@ async def delete_project(name: str = "temp-project"):
 
   return  {
     "message" : "project 삭제 완료 및 외부 보고 완료",
-    "async_wether" : f"{async_wether}",
     "elapsed_time" : f"{ end - start }s"
   }

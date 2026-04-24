@@ -14,13 +14,13 @@ WORKDIR /app
 #RUN pip install --no-cache-dir requests httpx
 
 #fastapi 사용을 위한 라이브러리 설치
-RUN pip install fastapi uvicorn
+RUN pip install fastapi uvicorn httpx
 
 # 소스코드 복사
-COPY fastapi/fastapi_sample02.py .
+COPY fastapi/fastapi_sample03.py .
 
 # Flask 포트
 EXPOSE 8080
 
 # 실행
-CMD ["uvicorn", "fastapi_sample02:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "fastapi_sample03:app", "--host", "0.0.0.0", "--port", "8080"]

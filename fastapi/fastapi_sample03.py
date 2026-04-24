@@ -4,6 +4,21 @@ import asyncio
 
 app = FastAPI()
 
+class Project:
+  def __init__(self, name, force):
+    self.name = name
+    self.force = force
+
+async def delete_db():
+  print("DB삭제 진행, 소요시간: 2초")
+  await asyncio.sleep(2)
+  print("DB삭제 완료")
+  
+async def delete_storage():
+  print("Storage삭제 진행, 소요시간: 1초")
+  await asyncio.sleep(1)
+  print("Stroage삭제 완료")
+    
 # 1. 외부 시스템에 보고하는 비동기 함수
 async def notify_monitoring_center(project_name, user):
     # 가상의 모니터링 서버 주소입니다.
@@ -19,20 +34,31 @@ async def notify_monitoring_center(project_name, user):
             print(f"{res_data['josn']}")
         return response.status_code
 
+  
 @app.get("/delete-project")
-async def delete_project(name: str = "temp"):
-    # [이 부분이 핵심!]
-    # 프로젝트를 삭제하기 전에, 모니터링 센터에 보고하는 작업을 '비동기'로 실행합니다.
-    # 하지만 굳이 보고가 끝날 때까지 기다릴 필요가 없다면? 
-    # 혹은 삭제와 보고를 '동시에' 하고 싶다면?
-    
-    print(f"🚀 '{name}' 삭제 로직 시작...")
-    
-    # 보고와 삭제 작업을 동시에 던지기!
-    report_task = notify_monitoring_center(name, "admin_jinsoo")
-    delete_task = asyncio.sleep(2) # 실제 삭제 로직 대신 2초 대기
-    
-    # 두 작업을 동시에 실행 (보고가 느려도 삭제는 진행됨!)
-    await asyncio.gather(report_task, delete_task)
-    
-    return {"message": f"'{name}' 삭제 및 외부 보고 완료"}
+async def delete_project(name: str = "temp-project", force: bool = False):
+  start = time.time()
+  target_project = Project(name,force)
+  async_wether = 2
+
+  tasks = [ delete_db(), delete_storage() , notify_monitoring_center(target_project.name, "admin_jinsoo") ]
+  print(f"Project: {target_project.name}을 삭제합니다. 강제여부: {target_project.force}")
+
+  try:
+    if target_project.force:
+      async_wether = 1
+      await asyncio.gather(*tasks)
+    else:
+      await asyncio.gather(delete_db(),notify_monitoring_center(target_project.name, "admin_jinsoo"))
+      await asyncio.gather(delete_storage(),notify_monitoring_center(target_project.name, "admin_jinsoo"))
+  except Exception as e:
+    return { "error msg": f"{e}" }  
+
+  end = time.time()
+
+  return  {
+    "message" : "project 삭제 완료 및 외부 보고 완료",
+    "Force" : f"{target_project.force}",
+    "async_wether" : f"{async_wether}",
+    "elapsed_time" : f"{ end - start }s"
+  }

@@ -13,8 +13,11 @@ async def notify_monitoring_center(project_name, user):
     async with httpx.AsyncClient() as client:
         # 비동기로 외부 API에 POST 요청을 보냅니다.
         response = await client.post(url, json=data)
+        res_data = respose.json()
         if response.status_code == 200:
             print(f"📢 [Report] 모니터링 센터에 보고 완료: {project_name}")
+            for key,value in res_data.items():
+                print(f"{key}:{value}")
         return response.status_code
 
 @app.get("/delete-project")

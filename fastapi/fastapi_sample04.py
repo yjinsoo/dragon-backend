@@ -37,8 +37,8 @@ async def create_instace(name: str):
   print(f" {name} 인스턴스 생성 완료")
 
   return {
-    "Istance Name" : f"{request_instance.name}"
-    "state" : f"{request_instance.state"}
+    "Istance Name" : f"{ request_instance.name }",
+    "state" : f"{ request_instance.state }"
     }
                  
 @app.get("/delete-instace")
@@ -50,8 +50,8 @@ async def delete_instance(name: str):
   print(f" {name} 인스턴스 삭제 완료")
   
   return {
-    "Istance Name" : f"{request_instance.name}"
-    "state" : f"{request_instance.state"}
+    "Istance Name" : f"{ request_instance.name }",
+    "state" : f"{ request_instance.state }"
     }
 
 

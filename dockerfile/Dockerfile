@@ -17,10 +17,10 @@ WORKDIR /app
 RUN pip install fastapi uvicorn httpx
 
 # 소스코드 복사
-COPY fastapi/fastapi_sample03.py .
+COPY fastapi/fastapi_sample04.py .
 
 # Flask 포트
 EXPOSE 8080
 
 # 실행
-CMD ["uvicorn", "fastapi_sample03:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "fastapi_sample04:app", "--host", "0.0.0.0", "--port", "8080"]

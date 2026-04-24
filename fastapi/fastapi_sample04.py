@@ -39,8 +39,19 @@ async def create_instace(name: str):
   return {
     "Istance Name" : f"{request_instance.name}"
     "state" : f"{request_instance.state"}
-
+    }
                  
 @app.get("/delete-instace")
-async def delete_instance():
+async def delete_instance(name: str):
+  print(f" {name} 인스턴스 삭제 시작. 소요시간 약 3초")
+  request_instance = Instance ( name, "RUNNING")
+  await asyncio.gather(delete_db(), delete_storage())
+  request_instance.state = "DELETED"
+  print(f" {name} 인스턴스 삭제 완료")
+  
+  return {
+    "Istance Name" : f"{request_instance.name}"
+    "state" : f"{request_instance.state"}
+    }
+
 

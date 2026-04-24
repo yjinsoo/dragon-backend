@@ -41,7 +41,7 @@ async def create_instace(name: str):
     "state" : f"{ request_instance.state }"
     }
                  
-@app.get("/delete-instace")
+@app.get("/delete-instance")
 async def delete_instance(name: str):
   print(f" {name} 인스턴스 삭제 시작. 소요시간 약 3초")
   request_instance = Instance ( name, "RUNNING")

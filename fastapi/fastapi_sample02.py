@@ -19,7 +19,7 @@ app = FastAPI()
 
 class Project:
   def __init__(self, name, force):
-    self.name = name,
+    self.name = name
     self.force = force
 
 async def delete_db():
@@ -33,7 +33,7 @@ async def delete_storage():
   print("Stroage삭제 완료")
   
 @app.get("/delete-project")
-async def delete_project(name: str = "temp-project", force: bool = "False"):
+async def delete_project(name: str = "temp-project", force: bool = False):
   start = time.time()
   target_project = Project(name,force)
 
@@ -42,7 +42,7 @@ async def delete_project(name: str = "temp-project", force: bool = "False"):
 
   try:
     if target_project.force:
-      await asyncio.gatcher(*tasks)
+      await asyncio.gather(*tasks)
     else:
       await delete_db()
       await delete_storage()
@@ -53,6 +53,7 @@ async def delete_project(name: str = "temp-project", force: bool = "False"):
 
   return  {
     "message" : "project 삭제 완료",
+    "Force" : f"{target_project.force}"
     "elapsed_time" : f"{ end - start }s"
   }
     

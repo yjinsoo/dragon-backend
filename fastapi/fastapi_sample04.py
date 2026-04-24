@@ -30,7 +30,17 @@ async def delete_storage():
 
 @app.get("/create-instance")
 async def create_instace(name: str):
+  print(f" {name} 인스턴스 생성 시작. 소요시간 약 3초")
+  request_instance = Instance ( name, "BUILDING")
+  await asyncio.sleep(3)
+  request_instance.state = "RUNNING"
+  print(f" {name} 인스턴스 생성 완료")
 
+  return {
+    "Istance Name" : f"{request_instance.name}"
+    "state" : f"{request_instance.state"}
+
+                 
 @app.get("/delete-instace")
 async def delete_instance():
 

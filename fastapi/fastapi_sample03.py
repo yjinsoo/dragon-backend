@@ -23,7 +23,7 @@ async def delete_storage():
 # 1. 외부 시스템에 보고하는 비동기 함수
 async def notify_monitoring_center(project_name, user):
     # 가상의 모니터링 서버 주소입니다.
-    url = "https://httpbin.org/post"  # 요청을 그대로 반사해주는 테스트용 사이트
+    url = "https://http1bin.org/post"  # 요청을 그대로 반사해주는 테스트용 사이트
     data = {"event": "DELETE_START", "project": project_name, "user": user}
     
     async with httpx.AsyncClient() as client:

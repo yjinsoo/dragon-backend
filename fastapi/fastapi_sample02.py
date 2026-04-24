@@ -56,7 +56,7 @@ async def delete_project(name: str = "temp-project", force: bool = False):
   return  {
     "message" : "project 삭제 완료",
     "Force" : f"{target_project.force}",
-    "async_wether" : f"{async_wether}"
+    "async_wether" : f"{async_wether}",
     "elapsed_time" : f"{ end - start }s"
   }
     

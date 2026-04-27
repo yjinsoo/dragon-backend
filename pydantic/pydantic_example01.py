@@ -30,3 +30,19 @@ async def create_instance(instance: InstanceCreate):
   print(f"[{instance.name}] 생성 완료 및 RUNNING 상태 전환")
     
   return instance
+
+@app.get("/get-instance/{name}")
+async def get_instance(name: str):
+    # 2. 메모리(딕셔너리)에서 이름으로 조회
+    instance = instance_db.get(name)
+    
+    # 만약 없다면 404 에러를 뱉음 (인프라 엔지니어의 기본!)
+    if not instance:
+        raise HTTPException(status_code=404, detail="해당 이름의 인스턴스를 찾을 수 없습니다.")
+    
+    return instance
+
+@app.get("/list-instances")
+async def list_instances():
+    # 3. 현재 메모리에 있는 모든 인스턴스 목록 반환
+    return instance_db

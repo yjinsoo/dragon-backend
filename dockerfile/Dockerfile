@@ -26,5 +26,5 @@ COPY pydantic/pydantic_example01.py .
 EXPOSE 8080
 
 # 실행
-CMD ["uvicorn", "pydantic_example01.p:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "pydantic_example01.py:app", "--host", "0.0.0.0", "--port", "8080"]
 #CMD ["python", "pydantic_sample.py"]

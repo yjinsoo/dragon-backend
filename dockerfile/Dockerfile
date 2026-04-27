@@ -20,8 +20,7 @@ RUN pip install fastapi uvicorn httpx
 RUN pip install pydantic
 
 # 소스코드 복사
-COPY fastapi/fastapi_sample04.py
- .
+COPY fastapi/fastapi_sample04.py .
 
 # Flask 포트
 EXPOSE 8080

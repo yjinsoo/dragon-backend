@@ -45,7 +45,7 @@ except Exception as e:
   print(f"error check {e}")
 
 node = Instance(**instance_data)
-print(node.network[0].ip)
+print(node.networks[0].ip)
 
 while True:
   time.sleep(60)

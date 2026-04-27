@@ -38,7 +38,7 @@ async def delete_storage():
   print("Stroage삭제 완료")
 
 
-@app.get("/create-instance")
+@app.post("/create-instance")
 async def create_instace(instance: InstanceCreate):
   print(f" {instance.name} 인스턴스 생성 시작. 소요시간 약 3초")
   await asyncio.sleep(3)

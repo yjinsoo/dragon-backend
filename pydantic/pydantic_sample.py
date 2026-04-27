@@ -22,6 +22,14 @@ class Instance(BaseModel):
 #테스트 데이터
 data = { "id": "123", "username": "jinsoo" }
 
+instance_data = {
+    "name": "openstack-node",
+    "networks": [
+        {"ip": "10.0.0.1", "vlan_id": 100},
+        {"ip": "192.168.1.5", "vlan_id": 200}
+    ]
+}
+
 user = User(**data)
 
 print(user.id)
@@ -35,7 +43,8 @@ try:
 except Exception as e:
   print(f"error check {e}")
 
-node = 
+node = Instance(**instance_data)
+print(node.network[0].ip)
 
 while True:
   time.sleep(60)

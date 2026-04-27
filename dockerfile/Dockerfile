@@ -16,6 +16,9 @@ WORKDIR /app
 #fastapi 사용을 위한 라이브러리 설치
 #RUN pip install fastapi uvicorn httpx
 
+#Pydantic 사용을 위한 라이브러리 설치
+RUN pip install pydantic
+
 # 소스코드 복사
 COPY pydantic/pydantic_sample.py .
 

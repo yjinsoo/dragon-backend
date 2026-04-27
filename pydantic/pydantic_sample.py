@@ -1,5 +1,6 @@
 import time
 from pydantic import BaseModel, Field
+from typing import List
 
 class User(BaseModel):
   id: int # 무조건 숫자여야 함

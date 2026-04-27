@@ -11,7 +11,14 @@ class ServerConfig(BaseModel):
   port: int = Field(ge=1024, le=65535)
   #vcpu는 1,2,4,8중 하나여야 함
   vcpu: int = Field(description="CPU 코어 수")
+  
+class Network(BaseModel):
+    ip: str
+    vlan_id: int
 
+class Instance(BaseModel):
+    name: str
+    networks: List[Network] # Network 모델 여러 개를 리스트로 가짐
 #테스트 데이터
 data = { "id": "123", "username": "jinsoo" }
 
@@ -28,6 +35,7 @@ try:
 except Exception as e:
   print(f"error check {e}")
 
+node = 
 
 while True:
   time.sleep(60)

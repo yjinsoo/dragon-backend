@@ -59,6 +59,11 @@ async def update_user(username:str, updatedata: UpdateUser):
   for key, value in update_dict.items():
     setattr(current_user, key, value)
 
+  return {
+    "message": f"{username} user 업데이트 완료",
+    "update data": update_user
+  }
+
 
 
 

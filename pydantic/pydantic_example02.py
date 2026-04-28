@@ -12,7 +12,9 @@ class User(BaseModel):
   age: int = Field(ge=0, le=100)
 
 
-@app.get("/create_user")
+@app.get("/create-user")
+async def create-user(user: User):
+
 
 
 

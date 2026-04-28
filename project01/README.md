@@ -140,7 +140,7 @@ class User(BaseModel):
 - Class Config를 사용하는 이유
 - 기본적으로 Pydantic은 데이터를 딕셔너리(dict) 형태로 읽는 것을 선호. 하지만 DB에서 데이터를 꺼내오면(SQLAlchemy), 데이터는 딕셔너리가 아니라 객체(Object) 형태
 
-### 발생문
+### 발생문제
 - 딕셔너리 방식: user["name"] (Pydantic의 기본 기대치)
 - 객체(속성) 방식: user.name (DB에서 꺼낸 데이터의 특징)
 

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.orm import Session
-from .database import engine, get_db, Base
-from .models import UserTable
+from database import engine, get_db, Base
+from models import UserTable
 from pydantic import BaseModel, Field
 
 # 서버 기동 시 테이블 생성

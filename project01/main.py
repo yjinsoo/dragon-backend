@@ -16,6 +16,7 @@ class User(BaseModel):
     class Config:
         from_attributes = True
 
+#USER 생성
 @app.post("/create-user")
 async def create_user(user: User, db: Session = Depends(get_db)):
     db_user = db.query(UserTable).filter(UserTable.name == user.name).first()
@@ -27,3 +28,7 @@ async def create_user(user: User, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+#USER 조회
+@app.get("/get-user/{username}")
+async def get_user(

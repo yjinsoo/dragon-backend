@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
-from typing import Literal
+from typing import Literal, Optional
 import asyncio
 
 user_list_db = {}
@@ -10,6 +10,10 @@ class User(BaseModel):
   name: str
   age: int = Field(ge=0, le=100)
 
+class UpdateUser(BaseModel):
+  name: Optional[str] = None
+  age: Optional[int] = Field(None, ge=0, le=100)
+  
 
 @app.post("/create-user")
 async def create_user(user: User):
@@ -40,3 +44,6 @@ async def delete_user(username: str):
   deleted_user=user_list_db.pop(username)
   
   return {"message": f"USER '{username}'가 성공적으로 삭제되었습니다.", "deleted_info": deleted_user}
+
+@app.patch("/update-user/{username}")
+async def update_user

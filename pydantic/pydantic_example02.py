@@ -19,7 +19,17 @@ async def create_user(user: User):
 
 
 @app.get("/check-user/{username}")
+async def check_user(username: str):
+  user = user_list_db.get(username)
 
+  if not user:
+    raise HTTPException(status_code=404, detail="해당 USER를 찾을 수없음")
+
+  return user
+
+@app.get("/list-user")
+async def user_list():
+  return user_list_db
 
 
 

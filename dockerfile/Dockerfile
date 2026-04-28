@@ -20,11 +20,11 @@ RUN pip install fastapi uvicorn httpx
 RUN pip install pydantic
 
 # 소스코드 복사
-COPY pydantic/pydantic_example01.py .
+COPY pydantic/pydantic_example02.py .
 
 # Flask 포트
 EXPOSE 8080
 
 # 실행
-CMD ["uvicorn", "pydantic_example01:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "pydantic_example02:app", "--host", "0.0.0.0", "--port", "8080"]
 #CMD ["python", "pydantic_sample.py"]

@@ -46,4 +46,21 @@ async def delete_user(username: str):
   return {"message": f"USER '{username}'가 성공적으로 삭제되었습니다.", "deleted_info": deleted_user}
 
 @app.patch("/update-user/{username}")
-async def update_user
+async def update_user(username:str, updatedata: UpdateUser):
+  update_user = user_list_db.get(username)
+  if not update_user:
+    raise HTTPException(status_code=404, detail="해당 USER를 찾을 수 없음")
+    
+  # 3. 보낸 데이터 중 '값이 있는 것'만 골라내기 (exclude_unset=True가 핵심!)
+  # 클라이언트가 안 보낸 필드는 무시하고 실제 보낸 필드만 딕셔너리로 바꿉니다.
+  update_dict = updatedata.model_dump(exclude_unset=True)
+
+
+  for key, value in update_dict.items():
+    setattr(current_user, key, value)
+
+
+
+
+
+

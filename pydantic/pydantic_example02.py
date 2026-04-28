@@ -31,5 +31,12 @@ async def check_user(username: str):
 async def user_list():
   return user_list_db
 
-
-
+@app.delete("/delete-user/{username}")
+async def delete_user(username: str):
+  user =  user_list_db.get(username)
+  if not user:
+    raise HTTPException(status_code=404, detail="해당 USER를 찾을 수 없음")
+  # pod은 삭제하면서 그값을 리턴해 준다
+  deleted_user=user_list_db.pop(username)
+  
+  return {"message": f"USER '{username}'가 성공적으로 삭제되었습니다.", "deleted_info": deleted_user}

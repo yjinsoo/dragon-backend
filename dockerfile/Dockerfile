@@ -14,17 +14,19 @@ WORKDIR /app
 #RUN pip install --no-cache-dir requests httpx
 
 #fastapi 사용을 위한 라이브러리 설치
-RUN pip install fastapi uvicorn httpx
+RUN pip install fastapi \
+    uvicorn \
+    pydantic \
+    sqlalchemy \
+    httpx
 
-#Pydantic 사용을 위한 라이브러리 설치
-RUN pip install pydantic
 
 # 소스코드 복사
-COPY pydantic/pydantic_example02.py .
+COPY project01/ .
 
 # Flask 포트
 EXPOSE 8080
 
 # 실행
-CMD ["uvicorn", "pydantic_example02:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 #CMD ["python", "pydantic_sample.py"]

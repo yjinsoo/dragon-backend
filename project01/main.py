@@ -31,4 +31,8 @@ async def create_user(user: User, db: Session = Depends(get_db)):
 
 #USER 조회
 @app.get("/get-user/{username}")
-async def get_user(
+async def get_user(username: str, db: Session = Depends(get_db)):
+    get_user = db.query(UserTable).filter(UserTable.name == username).first()
+    if get_user:
+        raise HTTPException(status_code=404, detail="존재하지 않는 USER")
+    return get_user

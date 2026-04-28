@@ -120,3 +120,9 @@ def get_db():
 | SessionLocal | DB 작업 단위 |
 | Base | ORM 모델의 부모 |
 | get_db | 커넥션 관리 (핵심) |
+
+---
+
+# 📦 main.py 코드 설명
+
+---

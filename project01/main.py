@@ -33,6 +33,8 @@ async def create_user(user: User, db: Session = Depends(get_db)):
 @app.get("/get-user/{username}")
 async def get_user(username: str, db: Session = Depends(get_db)):
     get_user = db.query(UserTable).filter(UserTable.name == username).first()
+    # get_user에 조건에 일치하는 user의 메모리 주소가 대입되면 True
+    # get_user에 조건에 일치하지않아 None값이 담기면 False
     if not get_user:
         raise HTTPException(status_code=404, detail="존재하지 않는 USER")
     return get_user

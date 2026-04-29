@@ -18,6 +18,11 @@ class User(BaseModel):
     class Config:
         from_attributes = True
 
+class UpdateUser(BaseModel):
+    name: Optional[str] = None
+    age: Optional[int] = Field(None, ge=0, le=100)
+    class Config:
+        from_attributes = True
 
 
 #USER 생성
@@ -55,7 +60,12 @@ async def delete_user(username: str, db: Session = Depends(get_db)):
 
 #USER 업데이트
 @app.patch("/update-user/{username}")
-async def update_user(
+async def update_user(username: str, updatedata: UpdateUser, db: Session = Depends(get_db)):
+    update_user = db.query(UserTable).filter(UserTable.name == username).first()
+    if not update_user:
+        raise HTTPException(status_code = 404, detail="Update할 USER가 존재하지 않음")
+    update_dic = updatedata.model_dump(exclude_unset = True)
+    return update_dic
 
     
 

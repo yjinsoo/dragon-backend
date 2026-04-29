@@ -51,6 +51,7 @@ async def delete_user(username: str, db: Session = Depends(get_db)):
 
 #USER 업데이트
 @app.patch("/update-user/{username}")
+async def update_user(
 
     
 

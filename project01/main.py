@@ -38,3 +38,19 @@ async def get_user(username: str, db: Session = Depends(get_db)):
     if not get_user:
         raise HTTPException(status_code=404, detail="존재하지 않는 USER")
     return get_user
+
+#USER 삭제
+@app.delete("/delete-user/{username}")
+async def delete_user(username: str, db: Session = Depends(get_db)):
+    delete_user = db.query(UserTable).filter(UserTable.name == username).first()
+    if not delete_user:
+        raise HTTPException(status_code=404, detail="삭제할 USER가 존재하지 않음")
+    db.delete(delete_user)
+    db.commit()
+    return { "message" : f"{username} 삭제완료" }
+
+#
+    
+
+
+

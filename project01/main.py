@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from database import engine, get_db, Base
 from models import UserTable
 from pydantic import BaseModel, Field
+from typing import Literal, Optional
+
 
 # 서버 기동 시 테이블 생성
 Base.metadata.create_all(bind=engine)
@@ -15,6 +17,8 @@ class User(BaseModel):
     age: int = Field(ge=0, le=100)
     class Config:
         from_attributes = True
+
+
 
 #USER 생성
 @app.post("/create-user")

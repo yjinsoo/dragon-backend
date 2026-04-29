@@ -67,11 +67,20 @@ async def update_user(username: str, updatedata: UpdateUser, db: Session = Depen
     update_dic = updatedata.model_dump(exclude_unset = True)
     if "name" in update_dic and "age" in update_dic:
         print(f"{update_dic['name']} and {update_dic['age']}")
+        update_user.name = update_dic["name"]
+        update_user.age = update_dic["age"]
+    
     elif "age" in update_dic:
         print(f"{update_dic['age']}")
+        update_user.age = update_dic["age"]
+        
     elif "name" in update_dic:
         print(f"{update_dic['name']}")
-    return update_dic
+        update_user.name = update_dic["name"]
+
+    db.commit()
+        
+    return { "message": f"{username} update 완료"} 
 
 
     

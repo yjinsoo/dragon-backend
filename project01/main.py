@@ -49,7 +49,9 @@ async def delete_user(username: str, db: Session = Depends(get_db)):
     db.commit()
     return { "message" : f"{username} 삭제완료" }
 
-#
+#USER 업데이트
+@app.patch("/update-user/{username}")
+
     
 
 

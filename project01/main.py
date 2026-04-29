@@ -65,11 +65,13 @@ async def update_user(username: str, updatedata: UpdateUser, db: Session = Depen
     if not update_user:
         raise HTTPException(status_code = 404, detail="Update할 USER가 존재하지 않음")
     update_dic = updatedata.model_dump(exclude_unset = True)
+'''
     if update_dic["name"]:
         print(f"{update_dic['name']}")
     if update_dic["age"]:
         print(f"{update_dic['age']}")
-    return update_user
+'''
+    return update_dic
 
 
     

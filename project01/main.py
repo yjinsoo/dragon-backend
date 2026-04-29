@@ -73,26 +73,10 @@ async def update_user(username: str, updatedata: UpdateUser, db: Session = Depen
     
     return update_user
 
-@app.post("/users")
-async def create_user(user: User, db: Session = Depends(get_db)):
-    new_user = UserTable(name=user.name, age=user.age)
-    db.add(new_user)
-    db.commit() # 여기서 이미 디스크에는 저장됨!
-
-    # [중요] refresh 전의 상태 확인
-    print(f"--- Refresh 전 ---")
-    print(f"ID: {new_user.id}")         # None 혹은 에러가 날 수 있음
-    print(f"생성시각: {new_user.created_at}") # None
-    
-    db.refresh(new_user) # 이제 DB와 동기화!
-
-    # [중요] refresh 후의 상태 확인
-    print(f"--- Refresh 후 ---")
-    print(f"ID: {new_user.id}")         # DB가 부여한 실제 ID (예: 1)
-    print(f"생성시각: {new_user.created_at}") # DB가 기록한 실제 시간 (예: 2026-04-29...)
-    
-    return new_user
-
+@app.get("/user-list")
+async def get_all_user(db: Session = Depends(get_db)):
+    user = db.query(UserTable).all()
+    return user
 
     
 

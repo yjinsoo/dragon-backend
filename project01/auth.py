@@ -8,7 +8,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 SECRET_KEY = "my_super_secret_key_dont_share_it"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30 # 토큰 유효 시간 30분
+ACCESS_TOKEN_EXPIRE_MINUTES = 1 # 토큰 유효 시간 30분
 
 # 1. 사용자가 입력한 평문 비밀번호를 암호화(Hash)하는 함수
 def get_password_hash(password):

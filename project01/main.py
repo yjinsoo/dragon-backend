@@ -4,6 +4,7 @@ from database import engine, get_db, Base
 from models import UserTable
 from pydantic import BaseModel, Field
 from typing import Literal, Optional
+from auth import get_password_hash
 
 
 # 서버 기동 시 테이블 생성
@@ -15,6 +16,7 @@ app = FastAPI()
 class User(BaseModel):
     name: str
     age: int = Field(ge=0, le=100)
+    password: str # 사용자가 입력할 평문 비밀번호
     class Config:
         from_attributes = True
 
@@ -78,7 +80,27 @@ async def get_all_user(db: Session = Depends(get_db)):
     user = db.query(UserTable).all()
     return user
 
+@app.post("/signup")
+async def signup(user: UserCreate, db: Session = Depends(get_db)):
+    # 1. 중복 체크 (기존과 동일)
+    db_user = db.query(UserTable).filter(UserTable.name == user.name).first()
+    if db_user:
+        raise HTTPException(status_code=400, detail="이미 존재하는 유저입니다.")
     
+    # 2. 비밀번호 암호화 (인프라 보안의 핵심!)
+    hashed_pwd = get_password_hash(user.password)
+    
+    # 3. DB 객체 생성 (암호화된 비번 저장)
+    new_user = UserTable(
+        name=user.name, 
+        hashed_password=hashed_pwd, 
+        age=user.age
+    )
+    
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return {"message": "회원가입 성공"}
 
 
 

@@ -19,7 +19,8 @@ RUN pip install fastapi \
     pydantic \
     sqlalchemy \
     httpx
-
+    
+RUN pip install "passlib[bcrypt]" python-jose[cryptography]
 
 # 소스코드 복사
 COPY project01/ .

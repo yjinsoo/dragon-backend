@@ -120,7 +120,7 @@ async def login(user: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="유저가 존재하지 않거나 비번이 틀림")
     
     # 3. 검증 성공 시 토큰 발급
-    access_token = create_access_token(data={"sub": db_user.name})
+    access_token = create_access_token(data={"sub": db_user.name, "brand": "carrtiage"})
     
     return {"access_token": access_token, "token_type": "bearer"}
 

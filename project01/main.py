@@ -31,6 +31,7 @@ class UserLogin(BaseModel):
     password: str # 사용자가 입력할 평문 비밀번호
     class Config:
         from_attributes = True
+        extra = "forbid"
 
 #USER 생성
 @app.post("/create-user")

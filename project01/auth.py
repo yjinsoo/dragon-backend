@@ -30,7 +30,7 @@ def get_current_user_name(token: str):
     try:
         print(f"DEBUG: 검증 시도하는 토큰 = {token[:20]}...")
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM],options={"verify_exp": False})
-        username: sstr = payload.get("Sub")
+        username: sstr = payload.get("sub")
         print(f"DEBUG: 해독 성공! 유저명 = {username}")
         
         if username is None:

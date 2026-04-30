@@ -4,7 +4,7 @@ from database import engine, get_db, Base
 from models import UserTable
 from pydantic import BaseModel, Field
 from typing import Literal, Optional
-from auth import get_password_hash
+from auth import get_password_hash, verify_password, create_access_token
 
 
 # 서버 기동 시 테이블 생성
@@ -102,5 +102,20 @@ async def signup(user: User, db: Session = Depends(get_db)):
     db.refresh(new_user)
     return {"message": "회원가입 성공"}
 
+@app.post("/login")
+async def login(user: User, db: Session = Depends(get_db)):
+    # 1. 유저 존재 확인
+    db_user = db.query(UserTable).filter(UserTable.name == user.name).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail="유저가 존재하지 않거나 비번이 틀림")
+    
+    # 2. 비밀번호 검증 (auth.py의 verify_password 사용)
+    if not verify_password(user.password, db_user.hashed_password):
+        raise HTTPException(status_code=400, detail="유저가 존재하지 않거나 비번이 틀림")
+    
+    # 3. 검증 성공 시 토큰 발급
+    access_token = create_access_token(data={"sub": db_user.name})
+    
+    return {"access_token": access_token, "token_type": "bearer"}
 
 

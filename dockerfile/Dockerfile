@@ -21,6 +21,7 @@ RUN pip install fastapi \
     httpx
     
 RUN pip install "passlib[bcrypt]" bcrypt==4.0.1
+RUN pip install "python-jose[cryptography]"
 
 # 소스코드 복사
 COPY project01/ .

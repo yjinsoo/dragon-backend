@@ -81,7 +81,7 @@ async def get_all_user(db: Session = Depends(get_db)):
     return user
 
 @app.post("/signup")
-async def signup(user: UserCreate, db: Session = Depends(get_db)):
+async def signup(user: User, db: Session = Depends(get_db)):
     # 1. 중복 체크 (기존과 동일)
     db_user = db.query(UserTable).filter(UserTable.name == user.name).first()
     if db_user:

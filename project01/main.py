@@ -87,8 +87,6 @@ async def signup(user: User, db: Session = Depends(get_db)):
     if db_user:
         raise HTTPException(status_code=400, detail="이미 존재하는 유저입니다.")
     
-    print(f"DEBUG: 넘어온 비번 = {user.password}")
-    print(f"DEBUG: 비번 길이 = {len(user.password)}")
     # 2. 비밀번호 암호화 (인프라 보안의 핵심!)
     hashed_pwd = get_password_hash(user.password)
     

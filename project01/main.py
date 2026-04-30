@@ -114,9 +114,11 @@ async def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(UserTable).filter(UserTable.name == user.name).first()
     if not db_user:
         raise HTTPException(status_code=400, detail="유저가 존재하지 않거나 비번이 틀림")
-    
+        
+    check_verify = verify_password(user.password, db_user.hashed_password)
+    print(f"DEBUG, {check_verify}")
     # 2. 비밀번호 검증 (auth.py의 verify_password 사용)
-    if not verify_password(user.password, db_user.hashed_password):
+    if not check_verify:
         raise HTTPException(status_code=400, detail="유저가 존재하지 않거나 비번이 틀림")
     
     # 3. 검증 성공 시 토큰 발급

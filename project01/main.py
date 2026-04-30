@@ -26,6 +26,11 @@ class UpdateUser(BaseModel):
     class Config:
         from_attributes = True
 
+class UserLogin(BaseModel):
+    name: str
+    password: str # 사용자가 입력할 평문 비밀번호
+    class Config:
+        from_attributes = True
 
 #USER 생성
 @app.post("/create-user")
@@ -103,7 +108,7 @@ async def signup(user: User, db: Session = Depends(get_db)):
     return {"message": "회원가입 성공"}
 
 @app.post("/login")
-async def login(user: User, db: Session = Depends(get_db)):
+async def login(user: UserLogin, db: Session = Depends(get_db)):
     # 1. 유저 존재 확인
     db_user = db.query(UserTable).filter(UserTable.name == user.name).first()
     if not db_user:

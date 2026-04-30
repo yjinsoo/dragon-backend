@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from jose import jwt
+from jose import jwt, JWTError
 from datetime import datetime, timedelta
 
 
@@ -25,3 +25,15 @@ def create_access_token(data: dict):
     # 서버의 비밀키로 서명하여 토큰 생성
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
+def get_current_user_name(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: sstr = payload.get("Sub")
+
+        if username is None:
+            return None
+        return username
+    except JWTError:
+        return None
+    

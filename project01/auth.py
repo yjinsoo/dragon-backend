@@ -32,7 +32,7 @@ def get_current_user_name(token: str):
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: sstr = payload.get("sub")
         brand: sstr = payload.get("brand")
-         print(f"DEBUG: 해독 성공! payload 확인 = {payload}")
+        print(f"DEBUG: 해독 성공! payload 확인 = {payload}")
         print(f"DEBUG: 해독 성공! 유저명 = {username}")
         print(f"DEBUG: 해독 성공! 브랜드 = {brand}")
         

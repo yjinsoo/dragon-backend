@@ -28,7 +28,7 @@ def create_access_token(data: dict):
 
 def get_current_user_name(token: str):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM],options={"verify_exp": False})
         username: sstr = payload.get("Sub")
 
         if username is None:

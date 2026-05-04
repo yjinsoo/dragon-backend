@@ -139,6 +139,6 @@ async def login(user: UserLogin, db: Session = Depends(get_db)):
 @app.get("/users/me")
 async def read_users_me(current_user: str = Depends(get_current_user)):
     
-    return {"message": f"안녕하세요 {username}님, 당신은 인증된 사용자입니다."}
+    return {"message": f"안녕하세요 {current_user}님, 당신은 인증된 사용자입니다."}
 
 

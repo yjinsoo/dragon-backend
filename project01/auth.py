@@ -1,6 +1,7 @@
 from passlib.context import CryptContext
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
+from fastapi import FastAPI, HTTPException, Depends, Header
 
 
 # 암호화 알고리즘 설정 (bcrypt 사용)
@@ -42,4 +43,15 @@ def get_current_user_name(token: str):
     except JWTError as e:
         print(f"DEBUG: JWT 해독 에러 발생! 사유 = {e}")
         return None
+
+def get_current_user(authorization: str = Header(None)):
+    if authorization is None or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="인증 헤더 누락")
+    
+    token = authorization.split(" ")[1]
+    username = get_current_user_name(token) # 이전에 만든 검증 함수 호출
+    
+    if username is None:
+        raise HTTPException(status_code=401, detail="유효하지 않은 토큰")
+    return username
     

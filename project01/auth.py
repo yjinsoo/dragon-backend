@@ -6,12 +6,9 @@ from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException, Depends, Header
 
 
-# .env 파일 로드
-load_dotenv()
-
 SECRET_KEY = os.getenv("SECRET_KEY","my_super_secret_key_dont_share_it")
-ALGORITHM = os.getenv("ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
+ALGORITHM = os.getenv("ALGORITHM","HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
 
 # 암호화 알고리즘 설정 (bcrypt 사용)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

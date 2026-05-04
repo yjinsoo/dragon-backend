@@ -18,7 +18,8 @@ RUN pip install fastapi \
     uvicorn \
     pydantic \
     sqlalchemy \
-    httpx
+    httpx \
+    python-dotenv
     
 RUN pip install "passlib[bcrypt]" bcrypt==4.0.1
 RUN pip install "python-jose[cryptography]"

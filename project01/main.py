@@ -137,17 +137,7 @@ async def login(user: UserLogin, db: Session = Depends(get_db)):
     return {"access_token": access_token, "token_type": "bearer"}
 
 @app.get("/users/me")
-async def read_users_me(authorization: str = Header(None)):
-    # 1. 헤더에서 'Bearer <토큰>' 형태의 값을 가져옵니다.
-    if authorization is None or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="인증 헤더가 없거나 잘못됨")
-    
-    token = authorization.split(" ")[1] # 'Bearer ' 뒷부분인 실제 토큰만 추출
-    
-    # 2. 토큰 검증
-    username = get_current_user_name(token)
-    if username is None:
-        raise HTTPException(status_code=401, detail="유효하지 않은 토큰입니다")
+async def read_users_me(current_user: str = Depends(get_current_user)):
     
     return {"message": f"안녕하세요 {username}님, 당신은 인증된 사용자입니다."}
 

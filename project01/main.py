@@ -4,7 +4,7 @@ from database import engine, get_db, Base
 from models import UserTable
 from pydantic import BaseModel, Field
 from typing import Literal, Optional
-from auth import get_password_hash, verify_password, create_access_token, get_current_user_name, get_current_user
+from auth import get_password_hash, verify_password, create_access_token, get_current_user
 
 
 # 서버 기동 시 테이블 생성
@@ -48,17 +48,12 @@ async def create_user(user: User, db: Session = Depends(get_db)):
 
 #USER 조회
 @app.get("/get-user/{username}")
-async def get_user(username: str, authorization: str = Header(None), db: Session = Depends(get_db)):
+async def get_user(username: str, db: Session = Depends(get_db), token_user: str = Depends(get_current_user)):
     # get_user에 조건에 일치하는 user의 메모리 주소가 대입되면 True
     # get_user에 조건에 일치하지않아 None값이 담기면 False
-    if authorization is None or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="인증 헤더가 없거나 잘못됨")
 
-    token = authorization.split(" ")[1] #'Bearer' 뒷부분인 실제 토큰만 추출
-    token_username = get_current_user_name(token)
-
-    if username is None or username!=token_username:
-        raise HTTPException(status_code=401, detail="유효하지 않은 토큰입니다")
+    if username!=token_user:
+        raise HTTPException(status_code=403, detail="본인 정보만 조회 가능합니다")
         
     get_user = db.query(UserTable).filter(UserTable.name == username).first()
     if not get_user:

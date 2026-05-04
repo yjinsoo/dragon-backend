@@ -4,7 +4,7 @@ from database import engine, get_db, Base
 from models import UserTable
 from pydantic import BaseModel, Field
 from typing import Literal, Optional
-from auth import get_password_hash, verify_password, create_access_token, get_current_user_name
+from auth import get_password_hash, verify_password, create_access_token, get_current_user_name, get_current_user
 
 
 # 서버 기동 시 테이블 생성

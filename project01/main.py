@@ -57,7 +57,7 @@ async def get_user(username: str, authorization: str = Header(None), db: Session
     token = authorization.split(" ")[1] #'Bearer' 뒷부분인 실제 토큰만 추출
     token_username = get_current_user_name(token)
 
-    if username is None:
+    if username is None or username!=token_username:
         raise HTTPException(status_code=401, detail="유효하지 않은 토큰입니다")
         
     get_user = db.query(UserTable).filter(UserTable.name == username).first()

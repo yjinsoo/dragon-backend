@@ -48,12 +48,22 @@ async def create_user(user: User, db: Session = Depends(get_db)):
 
 #USER 조회
 @app.get("/get-user/{username}")
-async def get_user(username: str, db: Session = Depends(get_db)):
-    get_user = db.query(UserTable).filter(UserTable.name == username).first()
+async def get_user(username: str, authorization: str = Header(None), db: Session = Depends(get_db)):
     # get_user에 조건에 일치하는 user의 메모리 주소가 대입되면 True
     # get_user에 조건에 일치하지않아 None값이 담기면 False
+    if authorization is None or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="인증 헤더가 없거나 잘못됨")
+
+    token = authorization.split(" ")[1] #'Bearer' 뒷부분인 실제 토큰만 추출
+    token_username = get_current_user_name(token)
+
+    if username is None:
+        raise HTTPException(status_code=401, detail="유효하지 않은 토큰입니다")
+        
+    get_user = db.query(UserTable).filter(UserTable.name == username).first()
     if not get_user:
         raise HTTPException(status_code=404, detail="존재하지 않는 USER")
+        
     return get_user
 
 #USER 삭제

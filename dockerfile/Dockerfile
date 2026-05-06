@@ -23,7 +23,7 @@ RUN pip install fastapi \
     
 #RUN pip install "passlib[bcrypt]" bcrypt==4.0.1
 #RUN pip install "python-jose[cryptography]"
-RUN pip install python collections.abc
+RUN pip install collections.abc
 
 # 소스코드 복사
 COPY fastapi/data_stream.py .

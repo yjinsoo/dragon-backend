@@ -26,11 +26,11 @@ RUN pip install psutil
 #RUN pip install "python-jose[cryptography]"
 
 # 소스코드 복사
-COPY fastapi/data_stream_cpu.py .
+COPY fastapi/data_stream_monitor.py .
 
 # Flask 포트
 EXPOSE 8080
 
 # 실행
-CMD ["uvicorn", "data_stream_cpu:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "data_stream_monitor:app", "--host", "0.0.0.0", "--port", "8080"]
 #CMD ["python", "pydantic_sample.py"]

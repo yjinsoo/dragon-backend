@@ -18,6 +18,6 @@ Rick: We gotta go, gotta get outta here, come on. Got a surprise for you Morty.
 
 
 @app.get("/story/stream", response_class=StreamingResponse)
-async def stream_story() -> AsyncIterable[str]:
+async def stream_story():
     for line in message.splitlines():
         yield line

@@ -26,11 +26,11 @@ RUN pip install psutil
 #RUN pip install "python-jose[cryptography]"
 
 # 소스코드 복사
-COPY fastapi/data_stream.py .
+COPY kubernetes/status.py .
 
 # Flask 포트
 EXPOSE 8080
 
 # 실행
-CMD ["uvicorn", "data_stream:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "status:app", "--host", "0.0.0.0", "--port", "8080"]
 #CMD ["python", "pydantic_sample.py"]

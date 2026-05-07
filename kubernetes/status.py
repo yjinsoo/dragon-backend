@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 import httpx  # 비동기 전용 requests 같은 놈
+import asyncio
 from pydantic import BaseModel, Field
 from typing import Literal, Optional
 import os

@@ -46,7 +46,7 @@ async def get_pods_status(namespace: str, podname: str):
 
 @app.get("/pods/{namespace}/{podname}/logs")
 async def get_pod_logs(namespace: str, podname: str):
-        url = f"https://{host}:{port}/api/v1/namespaces/{namespace}/pods/{podname}/logs"
+        url = f"https://{host}:{port}/api/v1/namespaces/{namespace}/pods/{podname}/log"
         headers = get_headers(token_path)
         client = httpx.AsyncClient(verify=ca_cert_path)
 

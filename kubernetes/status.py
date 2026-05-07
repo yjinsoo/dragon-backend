@@ -20,7 +20,7 @@ def get_headers(token_path):
         TOKEN = f.read().strip()
     headers = {
         "Authorization": f"Bearer {TOKEN}",
-        "Accept": "application/json
+        "Accept": "application/json"
         }
     return headers
 

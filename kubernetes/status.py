@@ -6,34 +6,32 @@ from typing import Literal, Optional
 import os
 
 
-
-
 app = FastAPI()
+
+# 1. 환경 변수에서 API 서버 주소 가져오기
+host = os.environ.get("KUBERNETES_SERVICE_HOST")
+port = os.environ.get("KUBERNETES_SERVICE_PORT")
+APISERVER = f"https://{host}:{port}"
+
+ca_cert_path = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+token_path = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+
+# 2. 파일에서 토큰 읽어오기
+with open(token_path, "r") as f:
+    TOKEN = f.read().strip()
+
+# 3. HTTP 헤더 구성
+headers = {
+    "Authorization": f"Bearer {TOKEN}",
+    "Accept": "application/json"
+}
 
 @app.get("/pods")
 async def get_pods():
-  
-async def fetch_post(post_id):
-    url = f"https://jsonplaceholder.typicode.com/posts/{post_id}"
-    async with httpx.AsyncClient() as client:
-        print(f"📦 Post {post_id} 요청 중...")
-        response = await client.get(url)
-        return response.json()['title']
-
-async def main():
-    start = time.time()
-    
-    # 1번부터 10번 포스트까지 리스트로 작업을 만듭니다.
-    tasks = [fetch_post(i) for i in range(1, 11)]
-    
-    # 동시에 던지기!
-    results = await asyncio.gather(*tasks)
-    
-    for i, title in enumerate(results, 1):
-        print(f"[{i}] {title}")
-        
-    end = time.time()
-    print(f"🚀 10개 API 동시 요청 총 소요 시간: {end - start:.2f}초")
+  url = f"https://{host}:{port}/api/v1/namespaces/default/pods"
+  async with httpx.AsyncClient(verify=ca_cert_path) as client:
+    response = await client.get(url, headers=headers, timeout=10.0)
+  return respone.json
 
 if __name__ == "__main__":
     asyncio.run(main())

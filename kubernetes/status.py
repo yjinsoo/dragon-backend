@@ -12,11 +12,10 @@ app = FastAPI()
 host = os.environ.get("KUBERNETES_SERVICE_HOST")
 port = os.environ.get("KUBERNETES_SERVICE_PORT")
 APISERVER = f"https://{host}:{port}"
-
 ca_cert_path = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
 token_path = "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
-# 2. 파일에서 토큰 읽어오기
+def get_token(
 with open(token_path, "r") as f:
     TOKEN = f.read().strip()
 

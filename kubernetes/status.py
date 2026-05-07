@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends, Header
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 import httpx  # 비동기 전용 requests 같은 놈
 from pydantic import BaseModel, Field
@@ -41,6 +42,16 @@ async def get_pods_status(namespace: str, podname: str):
         async with httpx.AsyncClient(verify=ca_cert_path) as client:
                 response = await client.get(url, headers=headers, timeout=10.0)
         return response.json()["status"]["phase"]
-        
+
+
+@app.get("/pods/{namespace}/{podname}/logs")
+async def get_pod_logs(namespace: str, podname: str):
+        url = f"https://{host}:{port}/api/v1/namespaces/{namespace}/pods/{podname}/logs"
+        headers = get_headers(token_path)
+        async with httpx.AsyncClient(verify=ca_cert_path) as client:
+                response = await client.get(url, headers=headers, timeout=10.0)
+        return response.json()["status"]["phase"]
+
+
 if __name__ == "__main__":
     asyncio.run(main())

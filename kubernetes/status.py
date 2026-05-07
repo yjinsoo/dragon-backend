@@ -54,7 +54,7 @@ async def get_pod_logs(namespace: str, podname: str):
                 async with client.stream("GET",url, headers=headers) as r:
                         async for chunk in r.aiter_raw():
                                 yield chunk
-                                async.sleep(1)
+                                asyncio.sleep(1)
         return StreamingResponse(request_stream())
 
 

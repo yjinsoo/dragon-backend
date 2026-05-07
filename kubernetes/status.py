@@ -28,10 +28,11 @@ headers = {
 
 @app.get("/pods")
 async def get_pods():
-  url = f"https://{host}:{port}/api/v1/namespaces/default/pods"
-  async with httpx.AsyncClient(verify=ca_cert_path) as client:
-    response = await client.get(url, headers=headers, timeout=10.0)
-  return response.json
+    url = f"https://{host}:{port}/api/v1/namespaces/default/pods"
+    print(f"{url},{TOKEN}")
+    async with httpx.AsyncClient(verify=ca_cert_path) as client:
+        response = await client.get(url, headers=headers, timeout=10.0)
+    return response.json
 
 if __name__ == "__main__":
     asyncio.run(main())

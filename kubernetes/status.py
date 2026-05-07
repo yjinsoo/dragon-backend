@@ -16,21 +16,23 @@ ca_cert_path = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
 token_path = "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
 
-with open(token_path, "r") as f:
-        TOKEN = f.read().strip()
-        
-headers = {
-        "Authorization": f"Bearer {TOKEN}",
-        "Accept": "application/json"
-}
+def get_headers(token_path):
+        with open(token_path, "r") as f:
+                TOKEN = f.read().strip()
+        headers = {
+                "Authorization": f"Bearer {TOKEN}",
+                "Accept": "application/json"
+        }
+        return headers
   
 
 @app.get("/pods")
 async def get_pods():
-    url = f"https://{host}:{port}/api/v1/namespaces/default/pods"
-    async with httpx.AsyncClient(verify=ca_cert_path) as client:
-        response = await client.get(url, headers=headers, timeout=10.0)
-    return response.json()
+        url = f"https://{host}:{port}/api/v1/namespaces/default/pods"
+        headers = get_headers(token_path)
+        async with httpx.AsyncClient(verify=ca_cert_path) as client:
+                response = await client.get(url, headers=headers, timeout=10.0)
+        return response.json()
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -35,12 +35,12 @@ async def get_pods(namespace: str):
         return response.json()
         
 @app.get("/pods/{namespace}/{podname}")
-async def get_pods(namespace: str, podname: str):
+async def get_pods_status(namespace: str, podname: str):
         url = f"https://{host}:{port}/api/v1/namespaces/{namespace}/pods/{podname}"
         headers = get_headers(token_path)
         async with httpx.AsyncClient(verify=ca_cert_path) as client:
                 response = await client.get(url, headers=headers, timeout=10.0)
-        return response.json()
+        return response.json().["status"].["phase"]
         
 if __name__ == "__main__":
     asyncio.run(main())

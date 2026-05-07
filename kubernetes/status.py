@@ -26,8 +26,8 @@ def get_headers(token_path):
         return headers
   
 
-@app.get("/pods")
-async def get_pods():
+@app.get("/pods/{namespace}")
+async def get_pods(namespace: str):
         url = f"https://{host}:{port}/api/v1/namespaces/default/pods"
         headers = get_headers(token_path)
         async with httpx.AsyncClient(verify=ca_cert_path) as client:

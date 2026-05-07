@@ -48,9 +48,13 @@ async def get_pods_status(namespace: str, podname: str):
 async def get_pod_logs(namespace: str, podname: str):
         url = f"https://{host}:{port}/api/v1/namespaces/{namespace}/pods/{podname}/logs"
         headers = get_headers(token_path)
-        async with httpx.AsyncClient(verify=ca_cert_path) as client:
-                response = await client.get(url, headers=headers, timeout=10.0)
-        return response.json()["status"]["phase"]
+        client = httpx.AsyncClient(verify=ca_cert_path)
+
+        async def request_stream():
+                async with client.stream("GET",url, headers=headers) as r:
+                        async for line in r.splitlines():
+                                yield line
+        return StreamingResponse(request_stream())
 
 
 if __name__ == "__main__":
